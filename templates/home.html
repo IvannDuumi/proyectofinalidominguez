@@ -1,12 +1,20 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
-{% block content %}
-<h1>Bienvenido a mi Proyecto Final  👋</h1>
-{% if user.is_authenticated %}
-  <p>Ir a <a href="{% url 'pages:list' %}">Pages</a>, tu <a href="{% url 'accounts:profile' %}">Perfil</a> o <a href="{% url 'messaging:inbox' %}">Inbox</a>.</p>
-{% else %}
-  <p><a href="{% url 'accounts:login' %}">Iniciar sesión</a> o <a href="{% url 'accounts:signup' %}">Crear cuenta</a> para empezar.</p>
-{% endif %}
+{% block title %}Inicio — Proyecto Final{% endblock %}
 
-<p>Home cargado correctamente.</p>
+{% block content %}
+<section class="hero">
+  <h1>Bienvenido 👋</h1>
+  <p>Este es mi Proyecto Final de Django para el curso. Navegá por el blog, mirá mi perfil o probá la mensajería.</p>
+
+  <div class="actions">
+    <a href="{% url 'pages:list' %}" class="btn outline">Blog</a>
+    <a href="{% url 'about' %}" class="btn outline">Acerca de mí</a>
+
+    {% if user.is_authenticated %}
+      <a href="{% url 'accounts:profile' %}" class="btn outline">Mi Perfil</a>
+    {% else %}
+      <a href="{% url 'accounts:login' %}" class="btn outline">Iniciar sesión</a>
+    {% endif %}
+  </div>
+</section>
 {% endblock %}

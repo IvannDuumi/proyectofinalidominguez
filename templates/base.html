@@ -3,65 +3,134 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{% block title %}Proyecto Final - Iván Domínguez{% endblock %}</title>
+  <title>{% block title %}Proyecto Final Django — Iván Domínguez{% endblock %}</title>
 
-  <!-- CSS minimalista con look negro/naranja -->
+  
   <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
 
   <style>
-    :root { --accent: #f0a500; }
-    body { background-color: #111; color: #eee; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    nav { background-color: #000; padding: 0.5rem 1rem; border-bottom: 2px solid var(--accent); }
-    nav a { margin-right: 1rem; font-weight: bold; }
-    .nav-wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-    .muted { opacity: 0.8; }
-    .btn-link {
-      background: none; border: none; color: var(--accent);
-      cursor: pointer; padding: 0; font: inherit;
+    :root {
+      --accent: #f0a500;           /* dorado/naranja */
+      --bg: #0c0c0c;               /* fondo principal */
+      --panel: #141414;            /* paneles/hero */
+      --ink: #f3f3f3;              /* texto claro */
+      --muted: #aaaaaa;
     }
-    header h1 { color: var(--accent); text-align: center; margin: 1rem 0; }
-    footer { text-align: center; margin-top: 2rem; opacity: 0.7; }
+
+    html, body { background: var(--bg); color: var(--ink); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+
+   
+    header {
+      background: #2a2a2a;
+      border-bottom: 2px solid var(--accent);
+      padding: 1.6rem 0 .6rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      color: var(--accent);
+      font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+      letter-spacing: .5px;
+    }
+
+   
+    nav {
+      background: #0f0f0f;
+      border-bottom: 1px solid #2c2c2c;
+    }
+    .nav-wrap {
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 1rem; padding: .6rem 0;
+    }
+    .nav-left a, .nav-right a {
+      margin-right: .9rem; text-decoration:none; font-weight: 800;
+      border-bottom: 2px solid transparent; padding-bottom: .25rem;
+    }
+    .nav-left a:last-child, .nav-right a:last-child { margin-right: 0; }
+    .nav-left a:hover, .nav-right a:hover, .nav-left a.active {
+      color: var(--accent); border-color: var(--accent);
+    }
+    .muted { color: var(--muted); }
+
+    
+    .btn {
+      display:inline-block;
+      padding: .7rem 1.2rem;
+      border-radius: 12px;
+      border: 2px solid var(--accent);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      transition: all .2s ease-in-out;
+    }
+    .btn { background: var(--accent); color: #111; }
+    .btn.outline { background: transparent; color: var(--accent); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(240,165,0,.25); }
+    .btn.outline:hover { background: var(--accent); color: #111; }
+
+    
+    .hero {
+      background: radial-gradient(1000px 450px at 10% -10%, #1a1a1a 0%, transparent 60%),
+                  radial-gradient(1000px 400px at 90% -10%, #181818 0%, transparent 60%),
+                  linear-gradient(180deg, #141414, #101010);
+      border: 1px solid #232323; border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+      padding: 2.2rem 1.6rem; margin: 2rem 0;
+    }
+    .hero h1 { margin: 0 0 .4rem; font-size: clamp(2rem, 5.2vw, 3.4rem); color: #fff; }
+    .hero p  { margin: 0 0 1.2rem; color: #d6d6d6; font-size: 1.15rem; }
+    .actions { display:flex; gap: 1rem; flex-wrap: wrap; }
+
+   
+    footer {
+      border-top: 1px solid #2c2c2c; color: #9b9b9b;
+      text-align:center; padding: 1.2rem 0; margin-top: 2.2rem;
+    }
   </style>
 </head>
-
 <body>
+
   <header>
-    <h1>Proyecto Final Django - Iván Domínguez</h1>
+    <div class="container">
+      <h1>Proyecto Final Django — Iván Domínguez</h1>
+    </div>
   </header>
 
-  <nav class="nav-wrap">
-    <div>
-      <a href="{% url 'home' %}">Inicio</a>
-      <a href="{% url 'about' %}">Acerca de mí</a>
-      <a href="{% url 'pages:list' %}">Blog</a>
-      {% if user.is_authenticated %}
-        <a href="{% url 'messaging:inbox' %}">Mensajes</a>
-      {% endif %}
-    </div>
-
-    <div>
-      {% if user.is_authenticated %}
-        <span class="muted">Hola, {{ user.username }}</span>
-        <a href="{% url 'accounts:profile' %}">Perfil</a>
-        <form action="{% url 'accounts:logout' %}" method="post" style="display:inline;">
-          {% csrf_token %}
-          <button type="submit" class="btn-link">Cerrar sesión</button>
-        </form>
-      {% else %}
-        <a href="{% url 'accounts:login' %}">Iniciar sesión</a>
-        <a href="{% url 'accounts:signup' %}">Registrarse</a>
-      {% endif %}
+ 
+  <nav>
+    <div class="container nav-wrap">
+      <div class="nav-left">
+        <a href="{% url 'home' %}" {% if request.resolver_match.url_name == 'home' %}class="active"{% endif %}>Inicio</a>
+        <a href="{% url 'about' %}" {% if request.resolver_match.url_name == 'about' %}class="active"{% endif %}>Acerca de mí</a>
+        <a href="{% url 'pages:list' %}" {% if request.resolver_match.app_name == 'pages' %}class="active"{% endif %}>Blog</a>
+      </div>
+      <div class="nav-right">
+        {% if user.is_authenticated %}
+          <span class="muted">Hola, {{ user.username }}</span>
+          <a href="{% url 'accounts:profile' %}">Perfil</a>
+          <form action="{% url 'accounts:logout' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn outline" style="padding:.35rem .75rem;">Cerrar sesión</button>
+          </form>
+        {% else %}
+          <a href="{% url 'accounts:login' %}">Iniciar sesión</a>
+          <a href="{% url 'accounts:signup' %}">Registrarse</a>
+        {% endif %}
+      </div>
     </div>
   </nav>
 
-  <main>
+ 
+  <main class="container">
     {% block content %}{% endblock %}
   </main>
 
+ 
   <footer>
-    <small>© 2025 Iván Domínguez — Proyecto Final Django</small>
+    <div class="container">
+      <small>© {% now "Y" %} Iván Domínguez — Proyecto Final Django</small>
+    </div>
   </footer>
 </body>
 </html>
