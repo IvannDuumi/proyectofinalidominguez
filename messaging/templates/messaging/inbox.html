@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Mis mensajes</h1>
+{% if messages %}
+  <ul>
+    {% for m in messages %}
+      <li><b>{{ m.subject }}</b> — {{ m.created_at|date:"d/m/Y H:i" }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No hay mensajes.</p>
+{% endif %}
+{% endblock %}

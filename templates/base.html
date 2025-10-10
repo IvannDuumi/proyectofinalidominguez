@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Proyecto Final - Iván Domínguez{% endblock %}</title>
+
+  <!-- CSS minimalista con look negro/naranja -->
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+
+  <style>
+    :root { --accent: #f0a500; }
+    body { background-color: #111; color: #eee; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    nav { background-color: #000; padding: 0.5rem 1rem; border-bottom: 2px solid var(--accent); }
+    nav a { margin-right: 1rem; font-weight: bold; }
+    .nav-wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    .muted { opacity: 0.8; }
+    .btn-link {
+      background: none; border: none; color: var(--accent);
+      cursor: pointer; padding: 0; font: inherit;
+    }
+    header h1 { color: var(--accent); text-align: center; margin: 1rem 0; }
+    footer { text-align: center; margin-top: 2rem; opacity: 0.7; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Proyecto Final Django - Iván Domínguez</h1>
+  </header>
+
+  <nav class="nav-wrap">
+    <div>
+      <a href="{% url 'home' %}">Inicio</a>
+      <a href="{% url 'about' %}">Acerca de mí</a>
+      <a href="{% url 'pages:list' %}">Blog</a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'messaging:inbox' %}">Mensajes</a>
+      {% endif %}
+    </div>
+
+    <div>
+      {% if user.is_authenticated %}
+        <span class="muted">Hola, {{ user.username }}</span>
+        <a href="{% url 'accounts:profile' %}">Perfil</a>
+        <form action="{% url 'accounts:logout' %}" method="post" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit" class="btn-link">Cerrar sesión</button>
+        </form>
+      {% else %}
+        <a href="{% url 'accounts:login' %}">Iniciar sesión</a>
+        <a href="{% url 'accounts:signup' %}">Registrarse</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <small>© 2025 Iván Domínguez — Proyecto Final Django</small>
+  </footer>
+</body>
+</html>

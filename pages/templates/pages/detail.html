@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block content %}
+<h1>{{ page.title }}</h1>
+<p><em>{{ page.subtitle }}</em></p>
+{% if page.cover %}<img src="{{ page.cover.url }}" alt="cover" style="max-width:400px">{% endif %}
+<p>{{ page.content }}</p>
+<p><small>Código: {{ page.code }} — {{ page.created_at|date:"d/m/Y H:i" }}</small></p>
+{% if user.is_authenticated %}
+  <a href="{% url 'pages:edit' page.pk %}">Editar</a> |
+  <a href="{% url 'pages:delete' page.pk %}">Borrar</a>
+{% endif %}
+{% endblock %}
