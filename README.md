@@ -2,7 +2,7 @@
 
 ## 📋 Descripción
 
-Este proyecto fue desarrollado como **entrega final del curso de Django**.  
+Este proyecto fue desarrollado como **entrega final del curso de Python**.  
 El objetivo fue construir una aplicación web completa con **registro de usuarios, autenticación, perfil personal editable y sistema de mensajería**, utilizando una arquitectura profesional basada en buenas prácticas de Django.
 
 El sitio incluye un diseño oscuro con acentos dorados, navegación dinámica, y un sistema de plantillas reutilizable.
