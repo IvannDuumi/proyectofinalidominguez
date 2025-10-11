@@ -1,15 +1,35 @@
-# proyectofinalidominguez
+# 🧠 Proyecto Final Django — Iván Domínguez
 
-Entrega final — **Python + Django**  
-Autor: **Iván Domínguez**
+## 📋 Descripción
 
-## Ejecutar
-```bash
-git clone https://github.com/IvannDuumi/proyectofinalidominguez.git
-cd proyectofinalidominguez
-python -m venv .venv
-.\.venv\Scripts\activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py createsuperuser  # opcional
-python manage.py runserver
+Este proyecto fue desarrollado como **entrega final del curso de Django**.  
+El objetivo fue construir una aplicación web completa con **registro de usuarios, autenticación, perfil personal editable y sistema de mensajería**, utilizando una arquitectura profesional basada en buenas prácticas de Django.
+
+El sitio incluye un diseño oscuro con acentos dorados, navegación dinámica, y un sistema de plantillas reutilizable.
+
+---
+
+## 🚀 Funcionalidades principales
+
+### 👤 Gestión de usuarios
+- Registro de nuevos usuarios (`signup`)
+- Inicio y cierre de sesión (`login` / `logout`)
+- Perfil personal con:
+  - Foto de avatar
+  - Biografía
+  - Fecha de nacimiento (con selector de calendario)
+- Edición del perfil desde el sitio (`/accounts/profile/edit/`)
+
+### 💬 Mensajería
+- Acceso disponible solo para usuarios autenticados.
+- Visualización del inbox (`/messaging/`).
+
+### 🏠 Sitio principal
+- Home con bienvenida personalizada (incluye nombre del usuario logueado)
+- Secciones “Blog” y “Acerca de mí”
+- Menú adaptable según el estado de autenticación
+- Estilo coherente con `base.html` y diseño responsive.
+
+---
+
+## 🧱 Estructura del proyect
