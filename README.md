@@ -32,4 +32,3 @@ El sitio incluye un diseño oscuro con acentos dorados, navegación dinámica, y
 
 ---
 
-## 🧱 Estructura del proyect
