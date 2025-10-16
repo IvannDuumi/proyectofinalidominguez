@@ -34,7 +34,7 @@ def profile_view(request):
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
-    """Edición del perfil (incluye avatar)."""
+    """Edición del perfil (incluye avatar y ahora nombre y apellido)."""
     model = Profile
     form_class = ProfileForm
     template_name = 'accounts/profile_form.html'

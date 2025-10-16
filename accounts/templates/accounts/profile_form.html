@@ -57,7 +57,7 @@
   <h1 style="margin:0 0 .75rem 0;font-size:2rem">
     Editar perfil
   </h1>
-  <p class="muted" style="margin-top:-.25rem">Actualizá tu avatar, biografía y fecha de nacimiento.</p>
+  <p class="muted" style="margin-top:-.25rem">Actualizá tu avatar, biografía, fecha de nacimiento, nombre y apellido.</p>
 
   <form method="post" enctype="multipart/form-data" class="form-grid">
     {% csrf_token %}
@@ -66,6 +66,16 @@
       <label for="{{ form.avatar.id_for_label }}">Avatar</label>
       {{ form.avatar }}
       <div class="hint">Formatos comunes (JPG/PNG) — tamaño razonable.</div>
+    </div>
+
+    <div>
+      <label for="{{ form.first_name.id_for_label }}">Nombre</label>
+      {{ form.first_name }}
+    </div>
+
+    <div>
+      <label for="{{ form.last_name.id_for_label }}">Apellido</label>
+      {{ form.last_name }}
     </div>
 
     <div>
