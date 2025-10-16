@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Mensaje — {{ block.super }}{% endblock %}
+{% block content %}
+<h1>{{ msg.subject }}</h1>
+<p class="muted">De: {{ msg.sender.username }} — Para: {{ msg.recipient.username }} — {{ msg.created_at|date:"d/m/Y H:i" }}</p>
+<pre style="white-space:pre-wrap">{{ msg.body }}</pre>
+<p><a href="{% url 'messaging:inbox' %}">Volver</a></p>
+{% endblock %}

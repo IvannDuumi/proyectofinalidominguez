@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Enviados — {{ block.super }}{% endblock %}
+{% block content %}
+<h1>Enviados</h1>
+<p><a class="btn" href="{% url 'messaging:compose' %}">Nuevo mensaje</a> | <a href="{% url 'messaging:inbox' %}">Inbox</a></p>
+{% if messages_list %}
+  <ul>
+  {% for m in messages_list %}
+    <li>
+      <a href="{% url 'messaging:detail' m.pk %}"><strong>{{ m.subject }}</strong></a>
+      — a {{ m.recipient.username }} — {{ m.created_at|date:"d/m/Y H:i" }}
+    </li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p class="muted">No enviaste mensajes.</p>
+{% endif %}
+{% endblock %}
