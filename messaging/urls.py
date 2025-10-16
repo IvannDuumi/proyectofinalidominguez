@@ -4,5 +4,5 @@ from . import views
 app_name = 'messaging'
 
 urlpatterns = [
-    path('inbox/', views.inbox, name='inbox'),
+    path('send/<int:recipient_id>/', views.send_message, name='send_message'),
 ]

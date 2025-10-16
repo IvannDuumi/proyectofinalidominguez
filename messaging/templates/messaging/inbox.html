@@ -1,13 +1,19 @@
 {% extends "base.html" %}
+{% block title %}Bandeja entrada — {{ block.super }}{% endblock %}
 {% block content %}
-<h1>Mis mensajes</h1>
-{% if messages %}
+<h1>Mensajes recibidos</h1>
+<p><a class="btn" href="{% url 'messaging:compose' %}">Nuevo mensaje</a> | <a href="{% url 'messaging:sent' %}">Mensajes Enviados</a></p>
+{% if messages_list %}
   <ul>
-    {% for m in messages %}
-      <li><b>{{ m.subject }}</b> — {{ m.created_at|date:"d/m/Y H:i" }}</li>
-    {% endfor %}
+  {% for m in messages_list %}
+    <li>
+      <a href="{% url 'messaging:detail' m.pk %}"><strong>{{ m.subject }}</strong></a>
+      — de {{ m.sender.username }} — {{ m.created_at|date:"d/m/Y H:i" }}
+      {% if not m.is_read %}<em>(no leído)</em>{% endif %}
+    </li>
+  {% endfor %}
   </ul>
 {% else %}
-  <p>No hay mensajes.</p>
+  <p class="muted">No tiene mensajes nuevos.</p>
 {% endif %}
 {% endblock %}

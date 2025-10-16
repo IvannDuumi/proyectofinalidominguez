@@ -4,4 +4,4 @@ from .models import Page
 class PageForm(forms.ModelForm):
     class Meta:
         model = Page
-        fields = ['title', 'subtitle', 'code', 'cover', 'content']
+        fields = ['title', 'content']

@@ -1,18 +1,13 @@
+from django.db import models
+from django.contrib.auth.models import User
 
-from django import forms
-from .models import Profile
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
+    birth_date = models.DateField(null=True, blank=True)
+    first_name = models.CharField(max_length=30, blank=True, null=True)
+    last_name = models.CharField(max_length=30, blank=True, null=True)
 
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['avatar', 'bio', 'birth_date']
-        widgets = {
-            'birth_date': forms.DateInput(attrs={
-                'type': 'date',
-                'class': 'form-control'
-            }),
-            'bio': forms.Textarea(attrs={
-                'rows': 5,
-                'placeholder': 'Contanos un poco sobre vos...'
-            }),
-        }
+    def __str__(self):
+        return f'{self.user.username} Profile'

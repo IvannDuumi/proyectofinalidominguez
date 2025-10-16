@@ -1,12 +1,17 @@
-from django.urls import path
-from . import views
-
-app_name = 'pages'
+from django.contrib import admin
+from django.urls import path, include
+from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.PageListView.as_view(), name='list'),
-    path('<int:pk>/', views.PageDetailView.as_view(), name='detail'),
-    path('create/', views.PageCreateView.as_view(), name='create'),
-    path('<int:pk>/edit/', views.PageUpdateView.as_view(), name='edit'),
-    path('<int:pk>/delete/', views.PageDeleteView.as_view(), name='delete'),
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
+    path('pages/', include('pages.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('messaging/', include('messaging.urls')),
+    path('admin/', admin.site.urls),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
