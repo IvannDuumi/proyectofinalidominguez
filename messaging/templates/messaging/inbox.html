@@ -1,13 +1,23 @@
 {% extends "base.html" %}
+
+{% block title %}Bandeja de Entrada{% endblock %}
+
 {% block content %}
-<h1>Mis mensajes</h1>
-{% if messages %}
-  <ul>
-    {% for m in messages %}
-      <li><b>{{ m.subject }}</b> — {{ m.created_at|date:"d/m/Y H:i" }}</li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>No hay mensajes.</p>
-{% endif %}
+  <section class="hero">
+    <h1>Bandeja de Entrada</h1>
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li>
+            <strong>{{ message.subject }}</strong> - {{ message.sender }} - {{ message.body }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No tienes mensajes en tu bandeja de entrada.</p>
+    {% endif %}
+
+    <!-- Botón para componer nuevo mensaje -->
+    <a href="{% url 'messaging:compose' %}" class="btn">Enviar un mensaje</a>
+  </section>
 {% endblock %}
