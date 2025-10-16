@@ -1,15 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from .forms import ProfileForm
+from .forms import SignUpForm  
 
-@login_required
-def profile_edit_view(request):
-    profile = request.user.profile
+def signup_view(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('accounts:profile')
+            form.save()  
+            return redirect('accounts:login')  
     else:
-        form = ProfileForm(instance=profile)
-    return render(request, 'accounts/profile_form.html', {'form': form})
+        form = SignUpForm()
+    return render(request, 'accounts/signup.html', {'form': form})
