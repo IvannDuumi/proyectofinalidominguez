@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+<<<<<<< HEAD
 
 {% block title %}Enviar mensaje{% endblock %}
 
@@ -11,4 +12,14 @@
       <button type="submit" class="btn">Enviar</button>
     </form>
   </section>
+=======
+{% block title %}Nuevo mensaje — {{ block.super }}{% endblock %}
+{% block content %}
+<h1>Nuevo mensaje</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn">Enviar</button>
+</form>
+>>>>>>> 534342b4ae5503d6dd2e2af41764a4d597df42f3
 {% endblock %}
